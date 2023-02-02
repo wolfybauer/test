@@ -1,8 +1,32 @@
-[gd_scene load_steps=10 format=3 uid="uid://ruquihlk4gqh"]
+[gd_scene load_steps=13 format=3 uid="uid://ruquihlk4gqh"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_ylu0c"]
 [ext_resource type="Texture2D" uid="uid://ci6ubyce2454f" path="res://9_replace.png" id="2_8cdmu"]
 [ext_resource type="TileSet" uid="uid://d1orfdn1al2h5" path="res://terrain_tiles.tres" id="3_llnyu"]
+[ext_resource type="PackedScene" uid="uid://3hufrkjhitef" path="res://Player.tscn" id="4_j2ufw"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kfl0w"]
+frequency = 0.006
+fractal_type = 2
+fractal_lacunarity = 3.0
+fractal_gain = 0.2
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_surd4"]
+noise = SubResource("FastNoiseLite_kfl0w")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ht7fa"]
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6q74v"]
+noise = SubResource("FastNoiseLite_ht7fa")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_liw8f"]
+frequency = 0.008
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3najo"]
+noise = SubResource("FastNoiseLite_liw8f")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k6ef1"]
 texture = ExtResource("2_8cdmu")
@@ -18,20 +42,24 @@ custom_data_layer_0/name = "floor"
 custom_data_layer_0/type = 2
 sources/4 = SubResource("TileSetAtlasSource_k6ef1")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_kfl0w"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_surd4"]
-noise = SubResource("FastNoiseLite_kfl0w")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_h31ba"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_b8q2t"]
-noise = SubResource("FastNoiseLite_h31ba")
-
 [node name="world" type="Node2D"]
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_ylu0c")
+
+[node name="NoiseMaps" type="Node2D" parent="."]
+
+[node name="AltitudeNoise" type="Sprite2D" parent="NoiseMaps"]
+texture = SubResource("NoiseTexture2D_surd4")
+
+[node name="TemperatureNoise" type="Sprite2D" parent="NoiseMaps"]
+texture = SubResource("NoiseTexture2D_6q74v")
+offset = Vector2(512, 0)
+region_rect = Rect2(512, 0, 512, 512)
+
+[node name="MoistureNoise" type="Sprite2D" parent="NoiseMaps"]
+position = Vector2(1024, 0)
+texture = SubResource("NoiseTexture2D_3najo")
 
 [node name="ReplacerMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -43,16 +71,10 @@ layer_0/tile_data = PackedInt32Array(0, 4, 0, 1, 4, 0, 65537, 4, 0, 65538, 4, 0,
 y_sort_enabled = true
 tile_set = ExtResource("3_llnyu")
 format = 2
+layer_0/y_sort_enabled = true
 
-[node name="AltitudeNoise" type="Sprite2D" parent="."]
-texture = SubResource("NoiseTexture2D_surd4")
+[node name="Player" parent="." instance=ExtResource("4_j2ufw")]
 
-[node name="TemperatureNoise" type="Sprite2D" parent="."]
-texture = SubResource("NoiseTexture2D_b8q2t")
-offset = Vector2(512, 0)
-region_rect = Rect2(512, 0, 512, 512)
-
-[node name="MoistureNoise" type="Sprite2D" parent="."]
-texture = SubResource("NoiseTexture2D_b8q2t")
-offset = Vector2(1024, 0)
-region_rect = Rect2(512, 0, 512, 512)
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+zoom = Vector2(2, 2)
