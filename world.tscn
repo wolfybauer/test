@@ -1,16 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://ruquihlk4gqh"]
+[gd_scene load_steps=13 format=3 uid="uid://dkf4vxad1qkwq"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_ylu0c"]
 [ext_resource type="Texture2D" uid="uid://ci6ubyce2454f" path="res://9_replace.png" id="2_8cdmu"]
 [ext_resource type="TileSet" uid="uid://d1orfdn1al2h5" path="res://terrain_tiles.tres" id="3_llnyu"]
-[ext_resource type="PackedScene" uid="uid://3hufrkjhitef" path="res://Player.tscn" id="4_j2ufw"]
+[ext_resource type="PackedScene" path="res://entity/Player.tscn" id="4_j2ufw"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kfl0w"]
-frequency = 0.006
-fractal_type = 2
-fractal_lacunarity = 3.0
-fractal_gain = 0.2
-fractal_weighted_strength = 1.0
+frequency = 0.008
+fractal_lacunarity = 1.8
+fractal_gain = 0.3
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_surd4"]
 noise = SubResource("FastNoiseLite_kfl0w")
@@ -22,8 +20,9 @@ frequency = 0.005
 noise = SubResource("FastNoiseLite_ht7fa")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_liw8f"]
-frequency = 0.008
-fractal_type = 2
+noise_type = 3
+fractal_octaves = 6
+fractal_lacunarity = 4.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3najo"]
 noise = SubResource("FastNoiseLite_liw8f")
@@ -46,8 +45,10 @@ sources/4 = SubResource("TileSetAtlasSource_k6ef1")
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_ylu0c")
+MOUNTAIN_START = 0.975
 
 [node name="NoiseMaps" type="Node2D" parent="."]
+position = Vector2(256, -256)
 
 [node name="AltitudeNoise" type="Sprite2D" parent="NoiseMaps"]
 texture = SubResource("NoiseTexture2D_surd4")
