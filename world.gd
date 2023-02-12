@@ -65,7 +65,7 @@ const object_data = {
 	'plains' : { 'palm' : 0.01, 'derrick' : 0.01 },
 	'beach' : { 'rock' : 0.001 },
 	'jungle' : { 'tree' : 0.015 },
-	'desert' : { 'rock' : 0.003, 'cacti' : 0.02, 'palm' : 0.001 },
+	'desert' : { 'rock' : 0.003, 'cacti' : 0.02, 'palm' : 0.01 },
 	'highlands' : { 'tree' : 0.01, 'derrick' : 0.005 },
 	'mountain' : { 'rock' : 0.001, 'derrick' : 0.001 },
 	'water' : {}
@@ -73,8 +73,8 @@ const object_data = {
 
 var rand_obj = {
 	'cacti' : preload("res://terrain_objects/cacti.tscn"),
-	'tree' : preload("res://terrain_objects/tree.tscn"),
-	'palm' : preload("res://terrain_objects/palm.tscn"),
+	'tree' : preload("res://terrain_objects/tree_sway.tscn"),
+	'palm' : preload("res://terrain_objects/palm_sway.tscn"),
 	'rock' : preload("res://terrain_objects/rock.tscn"),
 	'derrick' : preload("res://terrain_objects/derrick.tscn")
 }
@@ -268,3 +268,7 @@ func tile_to_scene(obj, pos):
 				print('too close! deleting obj at:', pos, '| sz:', sz)
 				inst.queue_free()
 					
+
+#func _unhandled_input(event):
+#	if event.is_action_pressed("ui_page_up"):
+#		reload_curr
