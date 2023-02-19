@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyd0m7o1rbybl"]
+
+[ext_resource type="PackedScene" uid="uid://85ua4wm813h7" path="res://terrain_objects/RandObj.tscn" id="1_n22il"]
+[ext_resource type="Texture2D" uid="uid://cy28gifllvrfa" path="res://assets/rocks0.png" id="2_0uo3x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrdq"]
+radius = 14.0
+height = 54.0
+
+[node name="Rock" instance=ExtResource("1_n22il")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_0uo3x")
+offset = Vector2(0, -30)
+hframes = 4
+frame = 3
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -14)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_onrdq")

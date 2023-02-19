@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b24bu28hqv35m"]
+
+[ext_resource type="PackedScene" uid="uid://85ua4wm813h7" path="res://terrain_objects/RandObj.tscn" id="1_ek1il"]
+[ext_resource type="Texture2D" uid="uid://dj1sbp6rdsujm" path="res://assets/cacti0.png" id="2_niw8b"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4pv7n"]
+radius = 5.0
+height = 22.0
+
+[node name="Cacti" instance=ExtResource("1_ek1il")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_niw8b")
+offset = Vector2(0, -15)
+hframes = 4
+frame = 3
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_4pv7n")

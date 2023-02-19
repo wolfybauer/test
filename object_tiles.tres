@@ -1,0 +1,23 @@
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://c52rhxnsvhspp"]
+
+[ext_resource type="PackedScene" uid="uid://dr7n2wc07klp0" path="res://town_objects/barn.tscn" id="1_jriek"]
+[ext_resource type="PackedScene" uid="uid://5yfhcww4ews2" path="res://terrain_objects/palm_sway.tscn" id="2_wrn7o"]
+[ext_resource type="PackedScene" uid="uid://b24bu28hqv35m" path="res://terrain_objects/cacti.tscn" id="3_v2cw1"]
+[ext_resource type="PackedScene" uid="uid://bpochmqwsv1ex" path="res://terrain_objects/tree_sway.tscn" id="4_oo8c6"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_oefya"]
+resource_name = "town_objects"
+scenes/1/scene = ExtResource("1_jriek")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_3ky57"]
+resource_name = "terrain_objects"
+scenes/1/scene = ExtResource("2_wrn7o")
+scenes/2/scene = ExtResource("3_v2cw1")
+scenes/3/scene = ExtResource("4_oo8c6")
+
+[resource]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(32, 16)
+sources/0 = SubResource("TileSetScenesCollectionSource_oefya")
+sources/1 = SubResource("TileSetScenesCollectionSource_3ky57")
